@@ -13,6 +13,7 @@ function set_gform_Configuration_deactivationPlugin($entry){
 
     //Map gfrom entry IDs to Variable Names
     $configuration_data['insertion_sold'] = $entry[3];
+    $configuration_data['insertion_updateDateTime'] = $entry['date_updated'];
 
 return $configuration_data;
 }
