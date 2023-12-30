@@ -9,14 +9,10 @@ function custom_deactivate_post_content( $entry, $form ) {
 
 
     // get data from gravity forms    
-    $configuration_data = set_gform_Configuration_deactivationPlugin($entry);
     $new_post = get_post($post->id);
+    $configuration_data = set_gform_Configuration_deactivationPlugin($entry);
 
-
-    
-    /* #### Post Title ### */    
-    $new_post->post_title = 'verkauft: ' . $new_post->post_title;
-    $new_post->post_name = $configuration_data['insertion_title'];
+    $deactivationReason = $entry[3];
 
 
     /* #### Post Status ### */    
@@ -27,9 +23,8 @@ function custom_deactivate_post_content( $entry, $form ) {
     $new_post->post_modified_gmt = get_gmt_from_date( $configuration_data['insertion_updateDateTime']);   
     
 
-    var_dump(get_post_meta($new_post->ID));exit();
-    update_post_meta( $new_post->ID, 'insertion_sold', 'verkauft' );
-        update_post_meta( $new_post->ID, 'insertion_height', '91' );
+    update_post_meta( $new_post->ID, 'insertion_sold_status', $deactivationReason);
+
 
     
     wp_update_post( $new_post, true );
