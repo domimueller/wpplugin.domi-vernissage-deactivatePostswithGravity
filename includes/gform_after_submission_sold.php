@@ -1,8 +1,9 @@
 <?php
 
+$configuration_data = custom_set_gform_Configuration_deactivationPlugin();
 
+add_action( 'gform_after_submission_' . $configuration_data['INSERAT_VERKAUFTMELDEN_FORM_ID'], 'custom_sold_post_content', 10, 2 );
 
-add_action( 'gform_after_submission_7', 'custom_deactivate_post_content', 10, 2 );
 function custom_deactivate_post_content( $entry, $form ) {
  
     global $post;
@@ -10,11 +11,11 @@ function custom_deactivate_post_content( $entry, $form ) {
 
     // get data from gravity forms    
     $new_post = get_post($post->id);
-    $configuration_data = set_gform_Configuration_deactivationPlugin($entry);
+    $configuration_data = custom_set_gform_Configuration_deactivationPlugin();
 
-    $deactivationReason = $entry[3];
-
-
+    // deactivation Reason is always verkauft, if this form is beeing submitted
+    $deactivationReason = 'verkauft';
+    
     /* #### Post Status ### */    
     $new_post->post_status = $configuration_data['INSERATE_AFTER_DEAKTIVIEREN_STATUS'];
 

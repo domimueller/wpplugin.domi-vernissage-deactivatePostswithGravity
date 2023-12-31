@@ -12,3 +12,8 @@ Die Reason sind an folgenden Stellen gepflegt:
 - Code 
 
 Dementsprechend sollte das Gravity Forms Formular nicht angepasst werden, ohne auch ACF und Code zu aktualisieren. Ansonsten wird das Inserat immer mit der Begründung "andere" gelöscht.
+
+# Configuration Possibilities (Staging)
+The Gform Mapping can be done for both Test- and Produktivumgebung. 
+- gformMappingProduktivumgebung.php
+- gformMappingTestumgebung.php

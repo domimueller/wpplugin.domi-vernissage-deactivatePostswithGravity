@@ -3,17 +3,24 @@
     /* Configuration*/
 
 
-function set_gform_Configuration_deactivationPlugin($entry){
+function custom_set_gform_Configuration_deactivationPlugin(){
   
     $configuration_data = array();
 
-    /* GLOBAL VARIABLES */
-    $configuration_data['INSERAT_DEAKTIVIEREN_FORM_ID'] = 7;
-    $configuration_data['INSERATE_AFTER_DEAKTIVIEREN_STATUS'] = 'PENDING';
+    // Load the Testdata or Produktivdata, depending on Setting in Options-Page
+    $isTest = get_field('isTest', 'option');
+    
+    if ($isTest == true) {
+        $configuration_data = custom_deactivate_gform_Mapping_Testumgebung();
+    }
+    else{
+        $configuration_data = custom_deactivate_gform_Mapping_Produktivumgebung();
+    }
 
-    //Map gfrom entry IDs to Variable Names
-    $configuration_data['insertion_sold_status'] = $entry[3];
-    $configuration_data['insertion_updateDateTime'] = $entry['date_updated'];
+    /* GLOBAL VARIABLES */;
+    $configuration_data['INSERATE_AFTER_DEAKTIVIEREN_STATUS'] = 'PENDING';
+    $configuration_data['INSERATE_AFTER_BEARBEITEN_STATUS'] = 'DRAFT';
+
 
 return $configuration_data;
 }
